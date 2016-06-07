@@ -18,15 +18,7 @@ namespace TwtichChatClient.Model
 
         static ChatMessageFactory()
         {
-            rawChatMessageRegex = new Regex(@"(?:color=(?<color>[^;]*?);)?" +
-                                            @"(?:display-name=(?<displayname>[^;]*?);)?" +
-                                            @"(?:mod=(?<mod>[0-1]);)" +
-                                            @"(?:room-id=(?<roomid>\d*?);)" +
-                                            @"(?:subscriber=(?<subscriber>[0-1]);)" +
-                                            @"(?:turbo=(?<turbo>[0-1]);)" +
-                                            @"(?:user-id=(?<userid>\d*?);)" +
-                                            @"(?:user-type=(?<usertype>)[^ ]*?) :" +
-                                            @"(?<username>\w+)!\k<username>@\k<username>.tmi.twitch.tv PRIVMSG #(?<channel>\w+) :(?<messagebody>.*)", RegexOptions.Compiled);
+            rawChatMessageRegex = new Regex(@"(?:color=(?<color>[^;]*?);)?(?:display-name=(?<displayname>[^;]*?);)?(?:emotes=(?<emotes>[^;]*?);)?(?:mod=(?<mod>[0-1]);)(?:room-id=(?<roomid>\d*?);)(?:subscriber=(?<subscriber>[0-1]);)(?:turbo=(?<turbo>[0-1]);)(?:user-id=(?<userid>\d*?);)(?:user-type=(?<usertype>)\S*?) :(?<username>\w+)!\k<username>@\k<username>.tmi.twitch.tv PRIVMSG #(?<channel>\w+) :(?<messagebody>.*)", RegexOptions.Compiled);
             badgesRegex = new Regex(@"badges=(?:([\w\d/]+)[,;])*", RegexOptions.Compiled);
             emotesRegex = new Regex(@"emotes=(?:(?<emoteid>\d+):(?:(?<start>\d+)-(?<end>\d+)[,;/])+)*", RegexOptions.Compiled);
 
