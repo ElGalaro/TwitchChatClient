@@ -11,8 +11,10 @@ using TwtichChatClient.Model;
 
 namespace TwitchChatClient.Logic
 {
-    public class ChatClient
+    public class ChatClient : IChatClient
     {
+        //TODO List<IMessageHandler>
+        private readonly IMessageHandler _handler;
         private TcpClient _tcpClient;
         private readonly StreamReader _reader;
         private readonly StreamWriter _writer;
@@ -21,18 +23,22 @@ namespace TwitchChatClient.Logic
         private const string Passwd = "blah";
         private readonly CancellationTokenSource _cts;
         public event NewChatMessageEventHandler NewChatMessage = delegate {};
+        
         public string ChannelName
         {
             get { return _channelName; }
         }
 
-        public ChatClient()
+        public ChatClient(IMessageHandler handler)
         {
             _tcpClient = new TcpClient("irc.twitch.tv", 6667);
             var networkStream = _tcpClient.GetStream();
             _reader = new StreamReader(networkStream);
             _writer = new StreamWriter(networkStream) {AutoFlush = true};
             _cts = new CancellationTokenSource();
+            _handler = handler;
+            _handler.ChatClient = this;
+            _handler.NewChatMessage += (sender, args) => NewChatMessage.Invoke(sender, args);
         }
 
         public void Connect()
@@ -49,21 +55,7 @@ namespace TwitchChatClient.Logic
             while (!token.IsCancellationRequested)
             {
                 var message = await _reader.ReadLineAsync();
-                if (message == "PING :tmi.twitch.tv")
-                {
-                    _writer.WriteLine("PONG :tmi.twitch.tv");
-                }
-                else
-                {
-                    var msg = ChatMessageFactory.FromRawString(message, DateTime.Now);
-                    if(msg.MessageBody != string.Empty)
-                    {
-                        NewChatMessage.Invoke(this, new NewChatMessageEventArgs
-                        {
-                            Message = msg
-                        });
-                    }
-                }
+                _handler.Handle(message);
             }
         }
 
@@ -77,6 +69,24 @@ namespace TwitchChatClient.Logic
             _writer.WriteLine($"JOIN #{channelName.ToLower()}");
             _channelName = channelName;
         }
+
+        public void JoinChannels(IEnumerable<string> channelNames)
+        {
+            foreach (var channelName in channelNames)
+            {
+                JoinChannel(channelName);
+            }
+        }
+
+        public async Task WriteRaw(string rawMessage)
+        {
+            await _writer.WriteLineAsync(rawMessage);
+        }
+    }
+    public interface IChatClient
+    {
+        Task WriteRaw(string rawMessage);
+        event NewChatMessageEventHandler NewChatMessage;
     }
 
     public delegate void NewChatMessageEventHandler(object sender, NewChatMessageEventArgs args);
@@ -84,5 +94,6 @@ namespace TwitchChatClient.Logic
     public class NewChatMessageEventArgs
     {
         public ChatMessage Message { get; set; }
+        public string Raw { get; set; }
     }
 }
