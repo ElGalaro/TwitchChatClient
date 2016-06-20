@@ -11,13 +11,13 @@ namespace TwitchChatClient.Logic
 {
     public class ChatMessageHandler : IMessageHandler
     {
-        private readonly ChatMessageFactory _factory;
+        private readonly IChatMessageFactory _factory;
         public IChatClient ChatClient { get; set; }
         public event NewChatMessageEventHandler NewChatMessage = delegate { };
 
-        public ChatMessageHandler()
+        public ChatMessageHandler(IChatMessageFactory factory)
         {
-            _factory = new ChatMessageFactory(new HttpApiProvider());
+            _factory = factory;
         }
 
         public async void Handle(string message)
@@ -37,7 +37,7 @@ namespace TwitchChatClient.Logic
                 {
                     Message = msg
                 });
-                Debug.WriteLine(message);
+                //Debug.WriteLine(message);
             }
         }
     }

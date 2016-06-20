@@ -67,7 +67,7 @@ namespace TwtichChatClient.Model
 
         public class Channel
         {
-            public bool mature { get; set; }
+            public bool? mature { get; set; }
             public string status { get; set; }
             public string broadcaster_language { get; set; }
             public string display_name { get; set; }
@@ -106,11 +106,14 @@ namespace TwtichChatClient.Model
 
         public static explicit operator Stream(StreamJson json)
         {
+            if (json == null)
+                return null;
             return new Stream
             {
                 CreatedAt = json.created_at,
                 Id = json._id,
-                Title = json.channel.status
+                Title = json.channel.status,
+                ChannelName = json.channel.name
             };
         }
     }

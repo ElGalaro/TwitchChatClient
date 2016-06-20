@@ -1,0 +1,15 @@
+{
+  "version": "1.0.0-*",
+  "frameworks": {
+    "net45": {
+      "wrappedProject": "../../TwtichChatClient.Model/TwtichChatClient.Model.csproj",
+      "bin": {
+        "assembly": "../../TwtichChatClient.Model/obj/{configuration}/TwtichChatClient.Model.dll",
+        "pdb": "../../TwtichChatClient.Model/obj/{configuration}/TwtichChatClient.Model.pdb"
+      },
+      "dependencies": {
+        "Newtonsoft.Json": "8.0.3"
+      }
+    }
+  }
+}

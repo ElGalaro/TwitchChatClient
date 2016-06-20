@@ -1,0 +1,16 @@
+{
+  "version": "1.0.0-*",
+  "frameworks": {
+    "net45": {
+      "wrappedProject": "../../TwitchChatClient.Logic/TwitchChatClient.Logic.csproj",
+      "bin": {
+        "assembly": "../../TwitchChatClient.Logic/obj/{configuration}/TwitchChatClient.Logic.dll",
+        "pdb": "../../TwitchChatClient.Logic/obj/{configuration}/TwitchChatClient.Logic.pdb"
+      },
+      "dependencies": {
+        "Newtonsoft.Json": "8.0.3",
+        "TwtichChatClient.Model": "1.0.0-*"
+      }
+    }
+  }
+}

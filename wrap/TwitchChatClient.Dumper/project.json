@@ -1,0 +1,17 @@
+{
+  "version": "1.0.0-*",
+  "frameworks": {
+    "net45": {
+      "wrappedProject": "../../TwitchChatClient.Dumper/TwitchChatClient.Dumper.csproj",
+      "bin": {
+        "assembly": "../../TwitchChatClient.Dumper/obj/{configuration}/TwitchChatClient.Dumper.dll",
+        "pdb": "../../TwitchChatClient.Dumper/obj/{configuration}/TwitchChatClient.Dumper.pdb"
+      },
+      "dependencies": {
+        "EntityFramework": "6.1.3",
+        "TwitchChatClient.Logic": "1.0.0-*",
+        "TwtichChatClient.Model": "1.0.0-*"
+      }
+    }
+  }
+}

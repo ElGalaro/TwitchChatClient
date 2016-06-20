@@ -1,20 +1,23 @@
 ﻿using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using TwtichChatClient.Model.Helpers;
 
 namespace TwtichChatClient.Model
 {
-    public class ChatMessageFactory
+    public class ChatMessageFactory : IChatMessageFactory
     {
         private static Regex rawChatMessageRegex;
         private static Regex badgesRegex;
         private static Regex emotesRegex;
-        private static readonly Dictionary<string, Stream> _streamsCache; 
+        //TODO figure out how to get rid of it
+        private static readonly ConcurrentDictionary<string, Stream> _streamsCache; 
 
-        private IApiProvider _provider;
+        private IApiRequester _requester;
 
         static ChatMessageFactory()
         {
@@ -22,12 +25,12 @@ namespace TwtichChatClient.Model
             badgesRegex = new Regex(@"badges=(?:([\w\d/]+)[,;])*", RegexOptions.Compiled);
             emotesRegex = new Regex(@"emotes=(?:(?<emoteid>\d+):(?:(?<start>\d+)-(?<end>\d+)[,;/])+)*", RegexOptions.Compiled);
 
-            _streamsCache = new Dictionary<string, Stream>();
+            _streamsCache = new ConcurrentDictionary<string, Stream>();
         }
 
-        public ChatMessageFactory(IApiProvider provider)
+        public ChatMessageFactory(IApiRequester requester)
         {
-            _provider = provider;
+            _requester = requester;
         }
         public async Task<ChatMessage> FromRawString(string rawString, DateTime time)
         {
@@ -56,9 +59,8 @@ namespace TwtichChatClient.Model
                 }
                 else
                 {
-                    var streamRaw = _provider.GetApiAsync<StreamJson>(result.Channel).Result;
-                    stream = (Stream) streamRaw;
-                    _streamsCache.Add(result.Channel, stream);
+                    stream = await _requester.GetStream(result.Channel);
+                    _streamsCache.TryAdd(result.Channel, stream);
                 }
                 result.Stream = stream;
             }
@@ -80,7 +82,9 @@ namespace TwtichChatClient.Model
                 IsTurbo = messageDto.IsTurbo,
                 MessageBody = messageDto.MessageBody,
                 RoomId = messageDto.RoomId,
-                Stream = (Stream) messageDto.Stream,
+                //Stream = (Stream) messageDto.Stream,
+                //TODO fix
+                Stream = _streamsCache.ContainsKey(messageDto.Channel) ? _streamsCache[messageDto.Channel] : null,
                 UserType = messageDto.UserType,
                 UserId = messageDto.UserId,
                 Time = messageDto.Time,

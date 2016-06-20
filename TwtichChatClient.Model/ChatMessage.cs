@@ -37,7 +37,8 @@ namespace TwtichChatClient.Model
             return new ChatMessageDto
             {
                 Id = message.Id,
-                Stream = (StreamDto) message.Stream,
+                //Stream = (StreamDto) message.Stream,
+                StreamId = message.Stream.Id,
                 Color = message.Color,
                 DisplayName = message.DisplayName,
                 Channel = message.Channel,
@@ -59,7 +60,8 @@ namespace TwtichChatClient.Model
     public class ChatMessageDto
     {
         public int Id { get; set; }
-        public StreamDto Stream { get; set; }
+        //public StreamDto Stream { get; set; }
+        public long StreamId { get; set; }
         public string Badges { get; set; }
         public string Color { get; set; }
         public string DisplayName { get; set; }

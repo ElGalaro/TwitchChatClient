@@ -10,7 +10,8 @@ namespace TwitchChatClient.Model.Tests
     [TestClass]
     public class ChatMessageTests
     {
-        public ChatMessageTests()
+        [TestMethod]
+        public void StreamsTest()
         {
         }
     }

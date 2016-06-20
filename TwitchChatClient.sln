@@ -11,9 +11,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TwtichChatClient.Logic.Test
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TwtichChatClient.Model", "TwtichChatClient.Model\TwtichChatClient.Model.csproj", "{EC5BDBF7-F797-4B8E-939A-8417B6A2D498}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TwitchChatClient.Dumper", "TwitchChatClient.Dumper\TwitchChatClient.Dumper.csproj", "{A1FD13F8-970E-4EB6-80D3-B5FAAE0E817C}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TwitchChatClient.Model.Tests", "TwitchChatClient.Model.Tests\TwitchChatClient.Model.Tests.csproj", "{29E40FAC-06DB-43EE-8D83-EEE48395CDD5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TwitchChatClient.Dumping", "TwitchChatClient.Dumping\TwitchChatClient.Dumping.csproj", "{93F5969F-AA61-4887-921C-CA52C3CD9DC7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TwitchChatClient.WebApi", "TwitchChatClient.WebApi\TwitchChatClient.WebApi.csproj", "{FFAFA831-EEF4-4E52-B249-1B52180FE62B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -37,14 +39,18 @@ Global
 		{EC5BDBF7-F797-4B8E-939A-8417B6A2D498}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EC5BDBF7-F797-4B8E-939A-8417B6A2D498}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EC5BDBF7-F797-4B8E-939A-8417B6A2D498}.Release|Any CPU.Build.0 = Release|Any CPU
-		{A1FD13F8-970E-4EB6-80D3-B5FAAE0E817C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A1FD13F8-970E-4EB6-80D3-B5FAAE0E817C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A1FD13F8-970E-4EB6-80D3-B5FAAE0E817C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A1FD13F8-970E-4EB6-80D3-B5FAAE0E817C}.Release|Any CPU.Build.0 = Release|Any CPU
 		{29E40FAC-06DB-43EE-8D83-EEE48395CDD5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{29E40FAC-06DB-43EE-8D83-EEE48395CDD5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{29E40FAC-06DB-43EE-8D83-EEE48395CDD5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{29E40FAC-06DB-43EE-8D83-EEE48395CDD5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{93F5969F-AA61-4887-921C-CA52C3CD9DC7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{93F5969F-AA61-4887-921C-CA52C3CD9DC7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{93F5969F-AA61-4887-921C-CA52C3CD9DC7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{93F5969F-AA61-4887-921C-CA52C3CD9DC7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FFAFA831-EEF4-4E52-B249-1B52180FE62B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FFAFA831-EEF4-4E52-B249-1B52180FE62B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FFAFA831-EEF4-4E52-B249-1B52180FE62B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FFAFA831-EEF4-4E52-B249-1B52180FE62B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
