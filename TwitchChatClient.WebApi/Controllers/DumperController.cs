@@ -33,18 +33,21 @@ namespace TwitchChatClient.WebApi.Controllers
 
         public async Task<IHttpActionResult> Put([FromBody] string arg)
         {
-            switch (arg)
+            await Task.Run(() =>
             {
-                case "start":
-                    if (!_dumper.Active)
-                    {
-                        _dumper.Start();
-                    }
-                    break;
-                case "stop":
-                    _dumper.Stop();
-                    break;
-            }
+                switch (arg)
+                {
+                    case "start":
+                        if (!_dumper.Active)
+                        {
+                            _dumper.Start();
+                        }
+                        break;
+                    case "stop":
+                        _dumper.Stop();
+                        break;
+                }
+            });
             return Ok();
         }
 
